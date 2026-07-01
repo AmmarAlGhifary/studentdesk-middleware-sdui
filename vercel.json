@@ -1,0 +1,36 @@
+{
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/api/index"
+    },
+    {
+      "source": "/api/login",
+      "destination": "/api/auth/login"
+    },
+    {
+      "source": "/api/home",
+      "destination": "/api/home/home"
+    },
+    {
+      "source": "/api/profile",
+      "destination": "/api/profile/profile"
+    },
+    {
+      "source": "/api/detail_profile",
+      "destination": "/api/profile/detail_profile"
+    },
+    {
+      "source": "/api/permintaan_surat",
+      "destination": "/api/home/permintaan_surat"
+    },
+    {
+      "source": "/api/pendaftaran_tes",
+      "destination": "/api/home/pendaftaran_tes"
+    },
+    {
+      "source": "/api/jadwal",
+      "destination": "/api/schedule/jadwal"
+    }
+  ]
+}
