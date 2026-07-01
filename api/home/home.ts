@@ -97,7 +97,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                         description: "Silahkan mendaftar untuk mengikuti tes TOEFL atau Test Baca Al-Quran.",
                         action: {
                             type: "navigation_action",
-                            destination: "pendaftaran_tes"
+                            destination: "pendaftaran_menu"
                         }
                     },
                 ]

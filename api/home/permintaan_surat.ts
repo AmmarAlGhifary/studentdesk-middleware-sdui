@@ -1,9 +1,16 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { logger } from '../../utils/logger';
+import { verifySession, fetchUaiApi } from '../../utils/uai_api';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
     if (req.method !== 'GET') {
         return res.status(405).json({ error: 'Method Not Allowed. Use GET.' });
+    }
+
+    const context = verifySession(req);
+    if (!context) {
+        logger.warn('Unauthorized permintaan_surat request');
+        return res.status(401).json({ error: 'Unauthorized session' });
     }
 
     try {
@@ -11,7 +18,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             type: "screen",
             screen_id: "permintaan_surat",
             app_bar: {
-                title: "Formulir Permintaan Surat",
+                title: "Histori Permintaan Surat",
                 show_profile_icon: false,
                 show_logout_icon: false
             },
@@ -19,23 +26,61 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                 type: "column",
                 children: [
                     {
-                        type: "section_header",
-                        title: "Layanan Permintaan Surat"
+                        type: "info_card",
+                        title: "Ajukan Surat Baru",
+                        description: "Klik di sini untuk membuat permintaan surat baru.",
+                        action: {
+                            type: "navigation_action",
+                            destination: "form_surat"
+                        }
                     },
                     {
-                        type: "info_card",
-                        title: "Nomor Induk Mahasiswa (NIM)",
-                        description: "Permintaan surat keterangan mahasiswa aktif untuk keperluan administrasi.",
+                        type: "spacer",
+                        size: "medium"
                     },
                     {
-                        type: "info_card",
-                        title: "Surat Pengantar Magang",
-                        description: "Permintaan surat pengantar untuk keperluan magang / kerja praktik.",
-                    },
-                    {
-                        type: "info_card",
-                        title: "Surat Rekomendasi",
-                        description: "Permintaan surat rekomendasi dari pihak universitas.",
+                        type: "tab_layout",
+                        tabs: [
+                            {
+                                title: "Dalam Proses (1)",
+                                children: [
+                                    {
+                                        type: "history_card",
+                                        title: "Surat Keterangan Mahasiswa",
+                                        date: "01 Juli 2026",
+                                        status_ka_prodi: "Disetujui",
+                                        status_akademik: "Menunggu",
+                                        ready_date: "-",
+                                        can_cancel: true,
+                                        can_download: false
+                                    }
+                                ]
+                            },
+                            {
+                                title: "Selesai (1)",
+                                children: [
+                                    {
+                                        type: "history_card",
+                                        title: "Surat PKL / Magang",
+                                        date: "15 Juni 2026",
+                                        status_ka_prodi: "Disetujui",
+                                        status_akademik: "Disetujui",
+                                        ready_date: "18 Juni 2026",
+                                        can_cancel: false,
+                                        can_download: true
+                                    }
+                                ]
+                            },
+                            {
+                                title: "Dibatalkan (0)",
+                                children: [
+                                    {
+                                        type: "empty_state_card",
+                                        message: "Belum ada permintaan yang dibatalkan."
+                                    }
+                                ]
+                            }
+                        ]
                     }
                 ]
             }

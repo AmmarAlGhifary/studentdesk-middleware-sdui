@@ -36,11 +36,17 @@ export function verifySession(req: VercelRequest): UaiAuthContext | null {
  * An authenticated POST request to the UAI Mobile API.
  * Automatically handles URL form encoding and XML parsing, returning the array of data items.
  */
-export async function fetchUaiApi(endpointPath: string, context: UaiAuthContext): Promise<any[]> {
+export async function fetchUaiApi(endpointPath: string, context: UaiAuthContext, extraParams?: Record<string, string>): Promise<any[]> {
     const form = new URLSearchParams();
     form.append('nim', context.nim);
     form.append('pwd', context.password);
     form.append('token', STATIC_TOKEN);
+    
+    if (extraParams) {
+        for (const [key, value] of Object.entries(extraParams)) {
+            form.append(key, value);
+        }
+    }
 
     try {
         const response = await axios.post(`${UAI_API_BASE}${endpointPath}`, form, {

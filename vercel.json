@@ -31,6 +31,38 @@
     {
       "source": "/api/jadwal",
       "destination": "/api/schedule/jadwal"
+    },
+    {
+      "source": "/api/form_surat",
+      "destination": "/api/home/form_surat"
+    },
+    {
+      "source": "/api/pengumuman",
+      "destination": "/api/home/pengumuman"
+    },
+    {
+      "source": "/api/pengumuman_detail",
+      "destination": "/api/home/pengumuman_detail"
+    },
+    {
+      "source": "/api/pendaftaran_menu",
+      "destination": "/api/home/pendaftaran_menu"
+    },
+    {
+      "source": "/api/uet_dashboard",
+      "destination": "/api/home/uet_dashboard"
+    },
+    {
+      "source": "/api/alquran_dashboard",
+      "destination": "/api/home/alquran_dashboard"
+    },
+    {
+      "source": "/api/form_uet",
+      "destination": "/api/home/form_uet"
+    },
+    {
+      "source": "/api/form_alquran",
+      "destination": "/api/home/form_alquran"
     }
   ]
 }
