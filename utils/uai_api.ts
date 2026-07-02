@@ -4,10 +4,10 @@ import axios from 'axios';
 import { XMLParser } from 'fast-xml-parser';
 import { logger } from './logger';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'thesis-studentdesk-secret-2026';
-const UAI_API_BASE = 'https://api.uai.ac.id/index.php/mobile';
-const BASIC_AUTH = 'Basic YWRtaW46MTIzNA==';
-const STATIC_TOKEN = '$2y$10LuJK13J9zIMWfsy/qeNOJu20EEti4gQZ6euX3LjSfu.OdcgxwyMeO';
+const JWT_SECRET = process.env.JWT_SECRET!;
+const UAI_API_BASE = process.env.UAI_API_BASE || 'https://api.uai.ac.id/index.php/mobile';
+const BASIC_AUTH = process.env.UAI_BASIC_AUTH!;
+const STATIC_TOKEN = process.env.UAI_STATIC_TOKEN!;
 
 export interface UaiAuthContext {
     nim: string;
