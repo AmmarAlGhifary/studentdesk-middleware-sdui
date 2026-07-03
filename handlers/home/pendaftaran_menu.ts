@@ -1,5 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { logger } from '../../utils/logger';
+import { SduiTheme } from '../../utils/theme';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
     if (req.method !== 'GET') {
@@ -20,8 +21,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                 type: "column",
                 children: [
                     {
+                        type: "spacer",
+                        size: "medium"
+                    },
+                    {
                         type: "section_header",
                         title: "Pilih Jenis Tes",
+                        modifier: SduiTheme.modifiers.sectionHeader
                     },
                     {
                         type: "info_card",
@@ -30,7 +36,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                         action: {
                             type: "navigation_action",
                             destination: "uet_dashboard"
-                        }
+                        },
+                        modifier: SduiTheme.modifiers.infoCard
+                    },
+                     {
+                        type: "spacer",
+                        size: "large"
                     },
                     {
                         type: "info_card",
@@ -39,7 +50,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                         action: {
                             type: "navigation_action",
                             destination: "alquran_dashboard"
-                        }
+                        },
+                        modifier: SduiTheme.modifiers.infoCard
                     }
                 ]
             }

@@ -1,6 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { logger } from '../../utils/logger';
 import { fetchUaiApi, verifySession } from '../../utils/uai_api';
+import { SduiTheme } from '../../utils/theme';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
     if (req.method !== 'GET') {
@@ -12,28 +13,30 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         if (!context) {
             return res.status(401).json({ error: 'Unauthorized' });
         }
-
+        
         logger.info(`Fetching UET scores for NIM: ${context.nim}`);
-
+        
         const items = await fetchUaiApi('/akademik/UET', context);
-
+        
         const historyCards: any[] = items.map((item: any) => {
             return {
                 type: "score_card",
                 title: `Sesi: ${item.sesi || "-"}`,
-                date: item.TglTest || "-",
-                score: item.nilai || "0",
-                status_color: "#4CAF50"
+                date_text: `Tanggal: ${item.TglTest || "-"}`,
+                score_text: item.nilai || "0",
+                status_color: "#4CAF50",
+                modifier: SduiTheme.modifiers.scoreCard
             };
         });
-
+        
         if (historyCards.length === 0) {
             historyCards.push({
                 type: "empty_state_card",
-                message: "Belum ada histori UET."
+                message: "Belum ada histori UET.",
+                modifier: { width: { type: "fill" }, margin: { horizontal: 16, vertical: 8 }, padding: { all: 16 }, corner_radius: 12, border_width: 1, border_color: "#E0E0E0", background_color: "#F8F9FA" }
             });
         }
-
+        
         const sduiResponse = {
             type: "screen",
             screen_id: "uet_dashboard",
@@ -49,7 +52,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                     {
                         type: "warning_banner",
                         title: "Tata Cara Pendaftaran",
-                        description: "Lakukan pembayaran Rp. 50.001 ke BSI 7229 7229 93 a/n RBB. Upload bukti bayar saat mendaftar jadwal."
+                        description: "Lakukan pembayaran Rp. 50.001 ke BSI 7229 7229 93 a/n RBB. Upload bukti bayar saat mendaftar jadwal.",
+                        modifier: SduiTheme.modifiers.warningBanner
                     },
                     {
                         type: "tab_layout",
@@ -68,7 +72,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                                         action: {
                                             type: "navigation_action",
                                             destination: "form_uet?jadwal=11_juli_2026"
-                                        }
+                                        },
+                                        modifier: { width: { type: "fill" }, margin: { horizontal: 16, vertical: 8 }, padding: { all: 16 }, corner_radius: 12, border_width: 1, border_color: "#E0E0E0", background_color: "#F8F9FA" }
                                     }
                                 ]
                             }

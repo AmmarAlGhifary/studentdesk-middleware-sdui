@@ -1,6 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { logger } from '../../utils/logger';
 import { verifySession, fetchUaiApi } from '../../utils/uai_api';
+import { SduiTheme } from '../../utils/theme';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
     if (req.method !== 'GET') {
@@ -43,7 +44,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         } else {
             bodyComponent = {
                 type: "empty_state_card",
-                message: "Pengumuman tidak ditemukan."
+                message: "Pengumuman tidak ditemukan.",
+                modifier: SduiTheme.modifiers.emptyStateCard
             };
         }
         

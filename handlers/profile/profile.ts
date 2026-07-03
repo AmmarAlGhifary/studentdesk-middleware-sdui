@@ -1,6 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { logger } from '../../utils/logger';
 import { verifySession, fetchUaiApi } from '../../utils/uai_api';
+import { SduiTheme } from '../../utils/theme';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
     if (req.method !== 'GET') {
@@ -25,14 +26,38 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                 type: "info_card_profile_circular_round_image",
                 image_url: profile.NamaFileFoto,
                 title: profile.mhs_nm || "Nama Tidak Tersedia",
+                modifier: {
+                    width: { type: "fill" },
+                    padding: { "all": 16 }
+                },
+                image_modifier: {
+                    width: { type: "exact", value: 200 },
+                    height: { type: "exact", value: 200 },
+                    corner_radius: 1000, 
+                    border_width: 2,
+                    border_color: "#808080" 
+                },
+                title_modifier: {
+                    margin: { top: 10 } 
+                }
             });
             children.push ({
                 type: "section_header",
-                title: "Biodata"
+                title: "Biodata",
+                modifier: SduiTheme.modifiers.sectionHeader
             });
             children.push({
                 type: "info_card_profile",
                 description: "Lihat Biodata Mahasiswa",
+                modifier: {
+                    width: { type: "fill" },
+                    padding: { all: 16 },
+                    margin: { horizontal: 16, bottom: 16 },
+                    corner_radius: 12,
+                    border_width: 1,
+                    border_color: "#E0E0E0",
+                    background_color: "#4c5059"
+                },
                 action: {
                     type: "navigation_action",
                     destination: "detail_profile"
@@ -44,7 +69,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                 message: "Data profil tidak ditemukan."
             });
         }
-
+        
         return res.status(200).json({
             type: "screen",
             screen_id: "profile_dashboard",

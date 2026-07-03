@@ -1,22 +1,23 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { logger } from '../../utils/logger';
 import { verifySession, fetchUaiApi } from '../../utils/uai_api';
+import { SduiTheme} from '../../utils/theme';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
     if (req.method !== 'GET') {
         return res.status(405).json({ error: 'Method Not Allowed. Use GET.' });
     }
-
+    
     const context = verifySession(req);
     if (!context) {
         logger.warn('Unauthorized form_surat request');
         return res.status(401).json({ error: 'Unauthorized session' });
     }
-
+    
     try {
         const items = await fetchUaiApi('/biodata/LihatBiodata', context);
         const profile = items.length > 0 ? items[0] : null;
-
+        
         return res.status(200).json({
             type: "screen",
             screen_id: "form_surat",
@@ -48,46 +49,56 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                         type: "accordion",
                         title: "Data Pemohon",
                         is_expanded: false,
+                        modifier: SduiTheme.modifiers.accordion,
+                        header_modifier: SduiTheme.modifiers.accordionHeader,
+                        content_modifier: SduiTheme.modifiers.accordionContent,
                         children: [
                             {
                                 type: "info_card_profile_detailed",
                                 title: "NIM / Program Studi",
-                                subtitle: profile ? `${profile.mhs_nim} - ${profile.NamaProgdi}` : "-"
+                                subtitle: profile ? `${profile.mhs_nim} - ${profile.NamaProgdi}` : "-",
+                                modifier: SduiTheme.modifiers.infoCardProfileDetailed
                             },
                             {
                                 type: "info_card_profile_detailed",
                                 title: "Nama Lengkap",
-                                subtitle: profile ? profile.mhs_nm : "-"
+                                subtitle: profile ? profile.mhs_nm : "-",
+                                modifier: SduiTheme.modifiers.infoCardProfileDetailed
                             },
                             {
                                 type: "info_card_profile_detailed",
                                 title: "Tempat, Tgl Lahir",
-                                subtitle: profile ? `${profile.mhs_tplhr}, ${profile.mhs_tglhr}` : "-"
+                                subtitle: profile ? `${profile.mhs_tplhr}, ${profile.mhs_tglhr}` : "-",
+                                modifier: SduiTheme.modifiers.infoCardProfileDetailed
                             },
                             {
                                 type: "info_card_profile_detailed",
                                 title: "No. Handphone",
-                                subtitle: profile ? profile.mhs_hp : "-"
+                                subtitle: profile ? profile.mhs_hp : "-",
+                                modifier: SduiTheme.modifiers.infoCardProfileDetailed
                             },
                             {
                                 type: "info_card_profile_detailed",
                                 title: "Email",
-                                subtitle: profile ? profile.mhs_email : "-"
+                                subtitle: profile ? profile.mhs_email : "-",
+                                modifier: SduiTheme.modifiers.infoCardProfileDetailed
                             },
                             {
                                 type: "info_card_profile_detailed",
                                 title: "Alamat Rumah",
-                                subtitle: profile ? profile.mhs_alm : "-"
+                                subtitle: profile ? profile.mhs_alm : "-",
+                                modifier: SduiTheme.modifiers.infoCardProfileDetailed
                             }
                         ]
                     },
                     {
                         type: "spacer",
-                        size: "medium"
+                        size: "small"
                     },
                     {
                         type: "section_header",
-                        title: "Detail Permintaan"
+                        title: "Detail Permintaan",
+                        modifier: SduiTheme.modifiers.sectionHeader
                     },
                     {
                         type: "dropdown_input",
@@ -99,7 +110,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                             "Surat Penelitian - Keperluan Skripsi",
                             "Surat Keterangan Lulus",
                             "Surat PKL/Magang"
-                        ]
+                        ],
+                        modifier: { width: { type: "fill" }, margin: { horizontal: 16, vertical: 8 } 
+                    }
                     },
                     {
                         type: "dropdown_input",
@@ -108,13 +121,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                         options: [
                             "Bahasa Indonesia",
                             "English"
-                        ]
+                        ],
+                        modifier: { width: { type: "fill" }, margin: { horizontal: 16, vertical: 8 } }
                     },
                     {
                         type: "text_area_input",
                         id: "keterangan",
                         label: "Keterangan Tambahan",
-                        placeholder: "Tuliskan keterangan (opsional)"
+                        placeholder: "Tuliskan keterangan (opsional)",
+                        modifier: { width: { type: "fill" }, margin: { horizontal: 16, vertical: 8 } }
                     },
                     {
                         type: "spacer",
@@ -128,7 +143,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                             type: "submit_form_action",
                             form_id: "form_surat",
                             endpoint: "/api/home/submit_surat"
-                        }
+                        },
+                        modifier: { width: { type: "fill" }, margin: { horizontal: 16, vertical: 8 } }
                     }
                 ]
             }

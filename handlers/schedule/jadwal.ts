@@ -19,7 +19,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                 children: [
                     {
                         type: "empty_state_card",
-                        message: "Jadwal feature is under construction."
+                        message: "Jadwal feature is under construction.",
+                        modifier: {
+                            width: { type: "fill" },
+                            padding: { vertical: 48, horizontal: 16 }
+                        }
                     }
                 ]
             }

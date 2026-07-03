@@ -1,6 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { logger } from '../../utils/logger';
 import { verifySession, fetchUaiApi } from '../../utils/uai_api';
+import { SduiTheme } from '../../utils/theme';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
     if (req.method !== 'GET') {
@@ -23,13 +24,28 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             const createCard = (title: string, subtitle: string | undefined | null) => ({
                 type: "info_card_profile_detailed",
                 title: title,
-                subtitle: subtitle || "-"
+                subtitle: subtitle || "-",
+                modifier: SduiTheme.modifiers.infoCardProfileDetailed
             });
 
             children.push({
                 type: "info_card_profile_circular_round_image",
                 image_url: profile.NamaFileFoto,
                 title: profile.mhs_nm || "Nama Tidak Tersedia",
+                modifier: {
+                    width: { type: "fill" },
+                    padding: { "all": 16 }
+                },
+                image_modifier: {
+                    width: { type: "exact", value: 200 },
+                    height: { type: "exact", value: 200 },
+                    corner_radius: 1000, 
+                    border_width: 2,
+                    border_color: "#808080"
+                },
+                title_modifier: {
+                    margin: { top: 10 } 
+                }
             })
 
             children.push(createCard("NIM", profile.mhs_nim));

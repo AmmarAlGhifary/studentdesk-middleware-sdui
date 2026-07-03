@@ -1,6 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { logger } from '../../utils/logger';
 import { fetchUaiApi, verifySession } from '../../utils/uai_api';
+import { SduiTheme } from '../../utils/theme';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
     if (req.method !== 'GET') {
@@ -21,17 +22,19 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             return {
                 type: "score_card",
                 title: `Tes Tanggal: ${item.Tanggal || "-"}`,
-                date: item.created_on || "-",
-                score: item.NilaiTest || "0",
-                status: item.Kelulusan || "-",
-                status_color: item.Kelulusan === "LULUS" ? "#4CAF50" : "#F44336"
+                date_text: `Dibuat: ${item.created_on || "-"}`,
+                score_text: item.NilaiTest || "0",
+                status_text: item.Kelulusan || "-",
+                status_color: item.Kelulusan === "LULUS" ? "#4CAF50" : "#F44336",
+                modifier: SduiTheme.modifiers.scoreCard
             };
         });
 
         if (historyCards.length === 0) {
             historyCards.push({
                 type: "empty_state_card",
-                message: "Belum ada histori Test Baca Al-Quran."
+                message: "Belum ada histori Test Baca Al-Quran.",
+                modifier: { width: { type: "fill" }, margin: { horizontal: 16, vertical: 8 }, padding: { all: 16 }, corner_radius: 12, border_width: 1, border_color: "#E0E0E0", background_color: "#F8F9FA" }
             });
         }
 
@@ -50,7 +53,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                     {
                         type: "warning_banner",
                         title: "Tata Cara Pendaftaran",
-                        description: "Lakukan pembayaran Rp. 30.001 ke BSI 7229 7229 93 a/n RBB. Upload bukti bayar saat mendaftar."
+                        description: "Lakukan pembayaran Rp. 30.001 ke BSI 7229 7229 93 a/n RBB. Upload bukti bayar saat mendaftar.",
+                        modifier: SduiTheme.modifiers.warningBanner
                     },
                     {
                         type: "tab_layout",
@@ -69,7 +73,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                                         action: {
                                             type: "navigation_action",
                                             destination: "form_alquran?jadwal=15_juli_2026"
-                                        }
+                                        },
+                                        modifier: SduiTheme.modifiers.infoCard, 
                                     }
                                 ]
                             }

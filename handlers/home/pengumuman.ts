@@ -1,6 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { logger } from '../../utils/logger';
 import { verifySession, fetchUaiApi } from '../../utils/uai_api';
+import { SduiTheme } from '../../utils/theme';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
     if (req.method !== 'GET') {
@@ -20,7 +21,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         
         let sortedList = Array.isArray(listPengumuman) ? [...listPengumuman] : [];
         
-        // Sort by date descending (same as flutter legacy app)
         sortedList.sort((a, b) => {
             if (!a.TanggalBuat && !b.TanggalBuat) return 0;
             if (!a.TanggalBuat) return 1;
@@ -30,9 +30,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             const dateB = new Date(b.TanggalBuat).getTime();
             return dateB - dateA;
         });
-
+        
         const infoCards = sortedList.map((item: any) => {
-            // formatDateWithTimeToIndonesia equivalent
             let formattedDate = item.TanggalBuat || '';
             if (formattedDate) {
                 const dateObj = new Date(formattedDate);
@@ -54,6 +53,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                 action: {
                     type: "navigation_action",
                     destination: `pengumuman_detail?id=${item.IDNotifikasi}`
+                },
+                modifier: {
+                    width: {  type: "fill" }, 
+                    margin: { horizontal: 16, vertical: 8 },
+                    padding: { all: 16 }, 
+                    corner_radius: 12, 
+                    border_width: 1, 
+                    border_color: "#E0E0E0", 
+                    background_color: "#4c5059" 
                 }
             };
         });
@@ -72,7 +80,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                 children: infoCards.length > 0 ? infoCards : [
                     {
                         type: "empty_state_card",
-                        message: "Tidak ada pengumuman saat ini."
+                        message: "Tidak ada pengumuman saat ini.",
+                        modifier: SduiTheme.modifiers.emptyStateCard
                     }
                 ]
             }

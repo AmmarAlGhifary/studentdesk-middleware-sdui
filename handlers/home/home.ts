@@ -1,6 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { logger } from '../../utils/logger';
 import { verifySession, fetchUaiApi } from '../../utils/uai_api';
+import { SduiTheme} from '../../utils/theme';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
     if (req.method !== 'GET') {
@@ -37,11 +38,19 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                 show_profile_icon: false,
                 show_notification_icon: true, 
                 notification_count: notifList ? notifList.length : 0,
-                show_logout_icon: true,
+                show_logout_icon: false,
             },
             body: {
                 type: "column",
+                arrangement: "space_between",
+                modifier: {
+                     width: { "type": "fill" } 
+                    },
                 children: [
+                    {
+                        type: "spacer",
+                        size: "medium"
+                    },
                     {
                         type: "carousel",
                         items: [
@@ -51,50 +60,71 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                             { url: `${baseUrl}/images/bg-uai-2.jpg` }
                         ]
                     },
+                    {
+                        type: "spacer",
+                        size: "medium"
+                    },
                     // Jadwal Kuliah Section
                     {
                         type: "section_header",
-                        title: "Jadwal Kuliah Hari Ini"
+                        title: "Jadwal Kuliah Hari Ini",
+                        modifier: SduiTheme.modifiers.sectionHeader
                     },
                     ...(scheduleCards.length > 0 ? [{
                         type: "horizontal_list",
                         children: scheduleCards
                     }] : [{
                         type: "empty_state_card",
-                        message: "Tidak ada jadwal perkuliahan untuk hari ini."
+                        message: "Tidak ada jadwal perkuliahan untuk hari ini.",
+                        modifier: SduiTheme.modifiers.emptyStateCard,
                     }]),
-
+                    
+                    {
+                        type: "spacer",
+                        size: "medium"
+                    },
+                    
                     // Jadwal Pengganti Section
                     {
                         type: "section_header",
-                        title: "Jadwal Pengganti"
+                        title: "Jadwal Pengganti",
+                        modifier: SduiTheme.modifiers.sectionHeader
                     },
+                    
                     ...(schedulePenggantiCards.length > 0 ? [{
                         type: "horizontal_list",
                         children: schedulePenggantiCards
                     }] : [{
                         type: "empty_state_card",
-                        message: "Tidak ada jadwal pengganti untuk saat ini."
+                        message: "Tidak ada jadwal pengganti untuk saat ini.",
+                        modifier: SduiTheme.modifiers.emptyStateCard,
                     }]),
-
+                    
                     // Layanan Akademik Section
                     {
                         type: "section_header",
                         title: "Layanan Akademik",
+                        modifier: SduiTheme.modifiers.sectionHeader
                     },
                     {
                         type: "info_card",
                         title: "Permintaan Surat",
                         description: "Akses layanan permintaan surat akademik.",
+                        modifier: SduiTheme.modifiers.infoCard,
                         action: {
                             type: "navigation_action",
                             destination: "permintaan_surat"
                         }
                     },
                     {
+                        type: "spacer",
+                        size: "large"
+                    },
+                    {
                         type: "info_card",
                         title: "Pendaftaran TOEFL / Test Baca Al-Quran",
                         description: "Silahkan mendaftar untuk mengikuti tes TOEFL atau Test Baca Al-Quran.",
+                        modifier: SduiTheme.modifiers.infoCard,
                         action: {
                             type: "navigation_action",
                             destination: "pendaftaran_menu"
@@ -134,7 +164,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             course_name: item.NamaMK || "Mata Kuliah",
             time: time,
             room: room,
-            lecturer: item.NamaDosen || "Dosen Pengampu"
+            lecturer: item.NamaDosen || "Dosen Pengampu",
+            modifier: SduiTheme.modifiers.scheduleCard
         };
     }
 }

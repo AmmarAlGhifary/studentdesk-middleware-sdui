@@ -6,8 +6,8 @@ import { logger } from './logger';
 
 const JWT_SECRET = process.env.JWT_SECRET!;
 const UAI_API_BASE = process.env.UAI_API_BASE || 'https://api.uai.ac.id/index.php/mobile';
-const BASIC_AUTH = process.env.UAI_BASIC_AUTH!;
-const STATIC_TOKEN = process.env.UAI_STATIC_TOKEN!;
+const BASIC_AUTH = process.env.UAI_BASIC_AUTH || process.env.BASIC_AUTH!;
+const STATIC_TOKEN = process.env.UAI_STATIC_TOKEN || process.env.STATIC_TOKEN!;
 
 export interface UaiAuthContext {
     nim: string;
