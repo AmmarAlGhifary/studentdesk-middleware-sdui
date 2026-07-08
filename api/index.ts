@@ -17,6 +17,7 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
             auth: "/api/login",
             home: "/api/home",
             profile: "/api/profile",
+            keuangan: "/api/keuangan",
             detail_profile: "/api/detail_profile",
             pendaftaran_tes: "/api/pendaftaran_tes",
             permintaan_surat: "/api/permintaan_surat",
