@@ -66,7 +66,7 @@
     },
     {
       "source": "/api/keuangan",
-      "destination": "/api/home?screen=keuangan"
+      "destination": "/api/payment?screen=keuangan"
     }
   ]
 }

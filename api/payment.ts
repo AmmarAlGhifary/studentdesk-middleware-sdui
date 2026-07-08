@@ -7,7 +7,7 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
     const screen = req.query.screen || endpoint;
 
     switch (screen){
-        case 'home': return keuanganHandler(req, res);
+        case 'keuangan': return keuanganHandler(req, res);
         default: return res.status(404).json({ error: 'Not found', requested: req.url });
 }
 }
