@@ -63,6 +63,10 @@
     {
       "source": "/api/form_alquran",
       "destination": "/api/home?screen=form_alquran"
+    },
+    {
+      "source": "/api/keuangan",
+      "destination": "/api/home?screen=keuangan"
     }
   ]
 }
