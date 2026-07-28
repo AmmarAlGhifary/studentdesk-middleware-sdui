@@ -66,16 +66,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                         size: "medium"
                     },
 
-                    // // Warning Banner
-                    // {
-                    //     type: "warning_banner",
-                    //     title: "PENGUMUMAN PENTING",
-                    //     message: "Masa Pembayaran UKT Berakhir Besok!",
-                    //     modifier: {
-                    //         background_color: "#FFEBEE",
-                    //         text_color: "#B71C1C"
-                    //     }
-                    // },
+                    // Warning Banner
+                    {
+                        type: "warning_banner",
+                        title: "PENGUMUMAN PENTING",
+                        message: "Masa Pembayaran UKT Berakhir Besok!",
+                        modifier: {
+                            background_color: "#FFEBEE",
+                            text_color: "#B71C1C"
+                        }
+                    },
 
                     // Jadwal Kuliah Section
                     {
