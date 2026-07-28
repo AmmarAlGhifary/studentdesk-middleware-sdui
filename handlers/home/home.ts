@@ -69,7 +69,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                     // Jadwal Kuliah Section
                     {
                         type: "section_header",
-                        title: "Jadwal Kuliah Hari Ini",
+                        title: "Jadwal Kelas Hari Ini",
                         modifier: SduiTheme.modifiers.sectionHeader
                     },
                     ...(scheduleCards.length > 0 ? [{
@@ -77,7 +77,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                         children: scheduleCards
                     }] : [{
                         type: "empty_state_card",
-                        message: "Tidak ada jadwal perkuliahan untuk hari ini.",
+                        message: "Tidak ada jadwal kelas untuk hari ini.",
                         modifier: SduiTheme.modifiers.emptyStateCard,
                     }]),
                     {
