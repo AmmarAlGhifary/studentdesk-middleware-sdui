@@ -69,7 +69,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                     // Jadwal Kuliah Section
                     {
                         type: "section_header",
-                        title: "Jadwal Kuliah Anda",
+                        title: "Jadwal andaa hari inii",
                         modifier: SduiTheme.modifiers.sectionHeader
                     },
                     ...(scheduleCards.length > 0 ? [{
