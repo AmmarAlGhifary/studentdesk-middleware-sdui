@@ -47,6 +47,24 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                      width: { "type": "fill" } 
                     },
                 children: [
+                    // Jadwal Kuliah Section
+                    {
+                        type: "section_header",
+                        title: "Jadwal Kuliah Hari Ini",
+                        modifier: SduiTheme.modifiers.sectionHeader
+                    },
+                    ...(scheduleCards.length > 0 ? [{
+                        type: "horizontal_list",
+                        children: scheduleCards
+                    }] : [{
+                        type: "empty_state_card",
+                        message: "Tidak ada jadwal perkuliahan untuk hari ini.",
+                        modifier: SduiTheme.modifiers.emptyStateCard,
+                    }]),
+                    {
+                        type: "spacer",
+                        size: "medium"
+                    },
 
                     // Layanan Akademik Section
                     {
@@ -113,25 +131,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                         message: "Tidak ada jadwal pengganti untuk saat ini.",
                         modifier: SduiTheme.modifiers.emptyStateCard,
                     }]),
-
-                     // Jadwal Kuliah Section
-                    {
-                        type: "section_header",
-                        title: "Jadwal Kuliah Hari Ini",
-                        modifier: SduiTheme.modifiers.sectionHeader
-                    },
-                    ...(scheduleCards.length > 0 ? [{
-                        type: "horizontal_list",
-                        children: scheduleCards
-                    }] : [{
-                        type: "empty_state_card",
-                        message: "Tidak ada jadwal perkuliahan untuk hari ini.",
-                        modifier: SduiTheme.modifiers.emptyStateCard,
-                    }]),
-                    {
-                        type: "spacer",
-                        size: "medium"
-                    },
 
                 ]
             }
