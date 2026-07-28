@@ -47,6 +47,38 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                      width: { "type": "fill" } 
                     },
                 children: [
+                      // Layanan Akademik Section
+                    {
+                        type: "section_header",
+                        title: "Layanan Akademik",
+                        modifier: SduiTheme.modifiers.sectionHeader
+                    },
+                    {
+                        type: "info_card",
+                        title: "Permintaan Surat",
+                        description: "Akses layanan permintaan surat akademik.",
+                        modifier: SduiTheme.modifiers.infoCard,
+                        action: {
+                            type: "navigation_action",
+                            destination: "permintaan_surat"
+                        }
+                    },
+                    {
+                        type: "spacer",
+                        size: "large"
+                    },
+                    {
+                        type: "info_card",
+                        title: "Pendaftaran TOEFL / Test Baca Al-Quran",
+                        description: "Silahkan mendaftar untuk mengikuti tes TOEFL atau Test Baca Al-Quran.",
+                        modifier: SduiTheme.modifiers.infoCard,
+                        action: {
+                            type: "navigation_action",
+                            destination: "pendaftaran_menu"
+                        }
+                    },
+
+                    // Carousel Section
                     {
                         type: "spacer",
                         size: "medium"
@@ -64,6 +96,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                         type: "spacer",
                         size: "medium"
                     },
+
                     // Jadwal Kuliah Section
                     {
                         type: "section_header",
@@ -99,37 +132,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                         message: "Tidak ada jadwal pengganti untuk saat ini.",
                         modifier: SduiTheme.modifiers.emptyStateCard,
                     }]),
-                    
-                    // Layanan Akademik Section
-                    {
-                        type: "section_header",
-                        title: "Layanan Akademik",
-                        modifier: SduiTheme.modifiers.sectionHeader
-                    },
-                    {
-                        type: "info_card",
-                        title: "Permintaan Surat",
-                        description: "Akses layanan permintaan surat akademik.",
-                        modifier: SduiTheme.modifiers.infoCard,
-                        action: {
-                            type: "navigation_action",
-                            destination: "permintaan_surat"
-                        }
-                    },
-                    {
-                        type: "spacer",
-                        size: "large"
-                    },
-                    {
-                        type: "info_card",
-                        title: "Pendaftaran TOEFL / Test Baca Al-Quran",
-                        description: "Silahkan mendaftar untuk mengikuti tes TOEFL atau Test Baca Al-Quran.",
-                        modifier: SduiTheme.modifiers.infoCard,
-                        action: {
-                            type: "navigation_action",
-                            destination: "pendaftaran_menu"
-                        }
-                    },
                 ]
             }
         };
