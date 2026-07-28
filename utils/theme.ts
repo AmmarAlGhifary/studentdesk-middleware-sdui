@@ -1,5 +1,5 @@
 const colors = {
-    cardBackground: "#1e9706",
+    cardBackground: "#4c5059",
     acordionClicked: "#e0e0e09a",
     cardBorder: "#E0E0E0",
     primary: "#1976D2",
