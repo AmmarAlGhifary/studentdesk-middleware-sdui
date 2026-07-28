@@ -47,6 +47,57 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                      width: { "type": "fill" } 
                     },
                 children: [
+
+                    // Layanan Akademik Section
+                    {
+                        type: "section_header",
+                        title: "Layanan Akademik",
+                        modifier: SduiTheme.modifiers.sectionHeader
+                    },
+                    {
+                        type: "info_card",
+                        title: "Permintaan Surat",
+                        description: "Akses layanan permintaan surat akademik.",
+                        modifier: SduiTheme.modifiers.infoCard,
+                        action: {
+                            type: "navigation_action",
+                            destination: "permintaan_surat"
+                        }
+                    },
+                    {
+                        type: "spacer",
+                        size: "large"
+                    },
+                    {
+                        type: "info_card",
+                        title: "Pendaftaran TOEFL / Test Baca Al-Quran",
+                        description: "Silahkan mendaftar untuk mengikuti tes TOEFL atau Test Baca Al-Quran.",
+                        modifier: SduiTheme.modifiers.infoCard,
+                        action: {
+                            type: "navigation_action",
+                            destination: "pendaftaran_menu"
+                        }
+                    },
+
+                     // Carousel Section
+                    {
+                        type: "spacer",
+                        size: "medium"
+                    },
+                    {
+                        type: "carousel",
+                        items: [
+                            { url: `${baseUrl}/images/bg-uai.jpg` },
+                            { url: `${baseUrl}/images/back-min.jpg` },
+                            { url: `${baseUrl}/images/hero-uai.jpg` },
+                            { url: `${baseUrl}/images/bg-uai-2.jpg` }
+                        ]
+                    },
+                    {
+                        type: "spacer",
+                        size: "medium"
+                    },
+
                     // Jadwal Pengganti Section
                     {
                         type: "section_header",
@@ -82,55 +133,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                         size: "medium"
                     },
 
-                    // Carousel Section
-                    {
-                        type: "spacer",
-                        size: "medium"
-                    },
-                    {
-                        type: "carousel",
-                        items: [
-                            { url: `${baseUrl}/images/bg-uai.jpg` },
-                            { url: `${baseUrl}/images/back-min.jpg` },
-                            { url: `${baseUrl}/images/hero-uai.jpg` },
-                            { url: `${baseUrl}/images/bg-uai-2.jpg` }
-                        ]
-                    },
-                    {
-                        type: "spacer",
-                        size: "medium"
-                    },
-
-                     // Layanan Akademik Section
-                    {
-                        type: "section_header",
-                        title: "Layanan Akademik",
-                        modifier: SduiTheme.modifiers.sectionHeader
-                    },
-                    {
-                        type: "info_card",
-                        title: "Permintaan Surat",
-                        description: "Akses layanan permintaan surat akademik.",
-                        modifier: SduiTheme.modifiers.infoCard,
-                        action: {
-                            type: "navigation_action",
-                            destination: "permintaan_surat"
-                        }
-                    },
-                    {
-                        type: "spacer",
-                        size: "large"
-                    },
-                    {
-                        type: "info_card",
-                        title: "Pendaftaran TOEFL / Test Baca Al-Quran",
-                        description: "Silahkan mendaftar untuk mengikuti tes TOEFL atau Test Baca Al-Quran.",
-                        modifier: SduiTheme.modifiers.infoCard,
-                        action: {
-                            type: "navigation_action",
-                            destination: "pendaftaran_menu"
-                        }
-                    },
                 ]
             }
         };
