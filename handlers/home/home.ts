@@ -47,6 +47,22 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                      width: { "type": "fill" } 
                     },
                 children: [
+                    // Jadwal Pengganti Section
+                    {
+                        type: "section_header",
+                        title: "Jadwal Pengganti",
+                        modifier: SduiTheme.modifiers.sectionHeader
+                    },
+                    
+                    ...(schedulePenggantiCards.length > 0 ? [{
+                        type: "horizontal_list",
+                        children: schedulePenggantiCards
+                    }] : [{
+                        type: "empty_state_card",
+                        message: "Tidak ada jadwal pengganti untuk saat ini.",
+                        modifier: SduiTheme.modifiers.emptyStateCard,
+                    }]),
+
                      // Jadwal Kuliah Section
                     {
                         type: "section_header",
@@ -66,21 +82,24 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                         size: "medium"
                     },
 
-                    // Jadwal Pengganti Section
+                    // Carousel Section
                     {
-                        type: "section_header",
-                        title: "Jadwal Pengganti",
-                        modifier: SduiTheme.modifiers.sectionHeader
+                        type: "spacer",
+                        size: "medium"
                     },
-                    
-                    ...(schedulePenggantiCards.length > 0 ? [{
-                        type: "horizontal_list",
-                        children: schedulePenggantiCards
-                    }] : [{
-                        type: "empty_state_card",
-                        message: "Tidak ada jadwal pengganti untuk saat ini.",
-                        modifier: SduiTheme.modifiers.emptyStateCard,
-                    }]),
+                    {
+                        type: "carousel",
+                        items: [
+                            { url: `${baseUrl}/images/bg-uai.jpg` },
+                            { url: `${baseUrl}/images/back-min.jpg` },
+                            { url: `${baseUrl}/images/hero-uai.jpg` },
+                            { url: `${baseUrl}/images/bg-uai-2.jpg` }
+                        ]
+                    },
+                    {
+                        type: "spacer",
+                        size: "medium"
+                    },
 
                      // Layanan Akademik Section
                     {
@@ -111,26 +130,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                             type: "navigation_action",
                             destination: "pendaftaran_menu"
                         }
-                    },
-
-                
-                    // Carousel Section
-                    {
-                        type: "spacer",
-                        size: "medium"
-                    },
-                    {
-                        type: "carousel",
-                        items: [
-                            { url: `${baseUrl}/images/bg-uai.jpg` },
-                            { url: `${baseUrl}/images/back-min.jpg` },
-                            { url: `${baseUrl}/images/hero-uai.jpg` },
-                            { url: `${baseUrl}/images/bg-uai-2.jpg` }
-                        ]
-                    },
-                    {
-                        type: "spacer",
-                        size: "medium"
                     },
                 ]
             }
