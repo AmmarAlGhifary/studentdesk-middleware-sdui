@@ -1,0 +1,93 @@
+import type { VercelRequest, VercelResponse } from '@vercel/node';
+import { logger } from '../../utils/logger';
+import { fetchUaiApi, verifySession } from '../../utils/uai_api';
+import { SduiTheme } from '../../utils/theme';
+
+export default async function handler(req: VercelRequest, res: VercelResponse) {
+    if (req.method !== 'GET') {
+        return res.status(405).json({ error: 'Method Not Allowed. Use GET.' });
+    }
+
+    try {
+        const context = verifySession(req);
+        if (!context) {
+            logger.warn('Unauthorized jadwal request');
+            return res.status(401).json({ error: 'Unauthorized session' });
+        }    
+        
+        logger.info(`Fetching Akademik Data for NIM: ${context.nim}`);
+
+         
+        const host = req.headers['x-forwarded-host'] || req.headers.host || 'localhost:3000';
+        const protocol = req.headers['x-forwarded-proto'] || (host.includes('localhost') || host.includes('10.0.2.2') ? 'http' : 'https');
+        const baseUrl = `${protocol}://${host}`;
+        
+        // const itemsJadwal = await fetchUaiApi('/jadwal/JadwalKuliah', context);
+        // const itemsNilai = await fetchUaiApi('/jadwal/JadwalUjian', context);
+        // const itemsPengganti = await fetchUaiApi('/jadwal/JadwalKuliahPengganti', context);
+
+        const [itemsJadwal, itemsNilai, itemsPengganti] = await Promise.all([
+            fetchUaiApi('/jadwal/JadwalKuliah', context),
+            fetchUaiApi('/jadwal/JadwalUjian', context),
+            fetchUaiApi('/jadwal/JadwalKuliahPengganti', context)
+        ]);
+
+        const scheduleCards = itemsJadwal.length > 0 ? itemsJadwal.map(mapToScheduleCard) : [];
+        const examCards = itemsNilai.length > 0 ? itemsNilai.map(mapToScheduleCard) : [];
+        const replacementCards = itemsPengganti.length > 0 ? itemsPengganti.map(mapToScheduleCard) : [];
+
+        return res.status(200).json({
+            type: "screen",
+            screen_id: "jadwal_dashboard",
+            app_bar: {
+                title: "Jadwal",
+                show_profile_icon: false,
+                show_notification_icon: true,
+                notification_count : 0
+            },
+            body: {
+                type: "column",
+                children: [
+                    {
+                        type: "empty_state_card",
+                        message: "Jadwal feature is under construction.",
+                        modifier: {
+                            width: { type: "fill" },
+                            padding: { vertical: 48, horizontal: 16 }
+                        }
+                    }
+                ]
+            }
+        });
+    } catch (error: any) {
+        logger.error('Error constructing jadwal SDUI', { message: error.message });
+        return res.status(500).json({ error: 'Server gagal memproses data jadwal' });
+    }
+
+    function mapToScheduleCard(item: any) {
+        const jadwalRaw = item.JadwalKuliah || "";
+        let time = "Waktu tidak tersedia";
+        let room = "Online / TBD";
+
+        if (jadwalRaw){
+            const parts = jadwalRaw.split(', ');
+            if (parts.length >= 2) {
+                const firstSchedule = `${parts[0]}, ${parts[1]}`;
+                const timeRoomParts = firstSchedule.split(' / ');
+                time = timeRoomParts[0] || time;
+                room = timeRoomParts[1] || room;
+            } else {
+                time = jadwalRaw;
+            }
+        }
+
+        return {
+            type : "schedule_card",
+            course_name: item.NamaMK || "Mata Kuliah",
+            time: time,
+            room: room,
+            lecturer: item.NamaDosen || "Dosen tidak tersedia",
+            modifier: SduiTheme.modifiers.scheduleCard
+        }
+    }
+}

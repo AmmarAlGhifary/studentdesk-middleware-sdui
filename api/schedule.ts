@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import jadwalHandler from '../handlers/schedule/jadwal';
+import jadwalHandler from '../handlers/akademik/jadwal';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
     const endpoint = (req.url || '').split('?')[0].split('/').pop();
