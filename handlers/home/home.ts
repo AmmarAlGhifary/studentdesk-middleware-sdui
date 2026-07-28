@@ -47,46 +47,23 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                      width: { "type": "fill" } 
                     },
                 children: [
-                      // Jadwal Kuliah Section
+                    // Jadwal Pengganti Section
                     {
                         type: "section_header",
-                        title: "Jadwal Kuliah Hari Ini",
+                        title: "Jadwal Pengganti",
                         modifier: SduiTheme.modifiers.sectionHeader
                     },
-                    ...(scheduleCards.length > 0 ? [{
+                    
+                    ...(schedulePenggantiCards.length > 0 ? [{
                         type: "horizontal_list",
-                        children: scheduleCards
+                        children: schedulePenggantiCards
                     }] : [{
                         type: "empty_state_card",
-                        message: "Tidak ada jadwal perkuliahan untuk hari ini.",
+                        message: "Tidak ada jadwal pengganti untuk saat ini.",
                         modifier: SduiTheme.modifiers.emptyStateCard,
                     }]),
-                    
-                    {
-                        type: "spacer",
-                        size: "medium"
-                    },
 
-                    // Carousel Section
-                    {
-                        type: "spacer",
-                        size: "medium"
-                    },
-                    {
-                        type: "carousel",
-                        items: [
-                            { url: `${baseUrl}/images/bg-uai.jpg` },
-                            { url: `${baseUrl}/images/back-min.jpg` },
-                            { url: `${baseUrl}/images/hero-uai.jpg` },
-                            { url: `${baseUrl}/images/bg-uai-2.jpg` }
-                        ]
-                    },
-                    {
-                        type: "spacer",
-                        size: "medium"
-                    },
-
-                      // Layanan Akademik Section
+                    // Layanan Akademik Section
                     {
                         type: "section_header",
                         title: "Layanan Akademik",
@@ -117,21 +94,43 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                         }
                     },
 
-                    // Jadwal Pengganti Section
+                    // Carousel Section
+                    {
+                        type: "spacer",
+                        size: "medium"
+                    },
+                    {
+                        type: "carousel",
+                        items: [
+                            { url: `${baseUrl}/images/bg-uai.jpg` },
+                            { url: `${baseUrl}/images/back-min.jpg` },
+                            { url: `${baseUrl}/images/hero-uai.jpg` },
+                            { url: `${baseUrl}/images/bg-uai-2.jpg` }
+                        ]
+                    },
+                    {
+                        type: "spacer",
+                        size: "medium"
+                    },
+
+                    // Jadwal Kuliah Section
                     {
                         type: "section_header",
-                        title: "Jadwal Pengganti",
+                        title: "Jadwal Kuliah Hari Ini",
                         modifier: SduiTheme.modifiers.sectionHeader
                     },
-                    
-                    ...(schedulePenggantiCards.length > 0 ? [{
+                    ...(scheduleCards.length > 0 ? [{
                         type: "horizontal_list",
-                        children: schedulePenggantiCards
+                        children: scheduleCards
                     }] : [{
                         type: "empty_state_card",
-                        message: "Tidak ada jadwal pengganti untuk saat ini.",
+                        message: "Tidak ada jadwal perkuliahan untuk hari ini.",
                         modifier: SduiTheme.modifiers.emptyStateCard,
                     }]),
+                    {
+                        type: "spacer",
+                        size: "medium"
+                    },
                 ]
             }
         };
