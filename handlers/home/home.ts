@@ -113,8 +113,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                         description: "Akses layanan permintaan surat akademik.",
                         modifier: SduiTheme.modifiers.infoCard,
                         action: {
-                            type: "navigation_action",
-                            destination: "permintaan_surat"
+                           type: "show_dialog_action",
+                           dialog: {
+                            type: "dialog",
+                            title: "Informasi",
+                            message: "layanan belum siap kenapa lah",
+                            confirm_text: "OK",
+                            confirm_action : { type: "none" }
+                           }
                         }
                     },
                     {
@@ -127,8 +133,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                         description: "Silahkan mendaftar untuk mengikuti tes TOEFL atau Test Baca Al-Quran.",
                         modifier: SduiTheme.modifiers.infoCard,
                         action: {
-                            type: "navigation_action",
-                            destination: "pendaftaran_tes"
+                           type: "show_dialog_action",
+                           dialog: {
+                            type: "dialog",
+                            title: "Informasi",
+                            message: "layanan belum siap kenapa lah",
+                            confirm_text: "OK",
+                            confirm_action : { type: "none" }
+                           }
                         }
                     },
                 ]
