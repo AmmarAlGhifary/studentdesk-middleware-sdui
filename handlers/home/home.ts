@@ -113,14 +113,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                         description: "Akses layanan permintaan surat akademik.",
                         modifier: SduiTheme.modifiers.infoCard,
                         action: {
-                            type: "show_dialog_action",
-                            dialog: {
-                                type: "dialog",
-                                title: "Informasi",
-                                message: "Fitur sedang dalam pengembangan",
-                                confirm_text: "OK",
-                                confirm_action: { type: "none" }
-                            }
+                            type: "navigation_action",
+                            destination: "permintaan_surat"
                         }
                     },
                     {
@@ -134,13 +128,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                         modifier: SduiTheme.modifiers.infoCard,
                         action: {
                             type: "navigation_action",
-                            dialog: {
-                                type: "dialog",
-                                title: "Informasi",
-                                message: "Fitur sedang dalam pengembangan",
-                                confirm_text: "OK",
-                                confirm_action: { type: "none" }
-                            },
+                            destination: "pendaftaran_tes"
                         }
                     },
                 ]
