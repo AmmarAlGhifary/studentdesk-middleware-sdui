@@ -73,7 +73,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                         modifier: SduiTheme.modifiers.sectionHeader
                     },
                     ...(scheduleCards.length > 0 ? [{
-                        type: "horizontal_list",
+                        type: "column",
                         children: scheduleCards
                     }] : [{
                         type: "empty_state_card",
