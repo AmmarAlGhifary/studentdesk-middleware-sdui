@@ -113,8 +113,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                         description: "Akses layanan permintaan surat akademik.",
                         modifier: SduiTheme.modifiers.infoCard,
                         action: {
-                            type: "navigation_action",
-                            destination: "permintaan_surat"
+                            type: "show_snackbar",
+                            message: "Fitur ini masih dalam pengembangan"
                         }
                     },
                     {
