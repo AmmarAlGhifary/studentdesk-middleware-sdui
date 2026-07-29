@@ -124,7 +124,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                     {
                         type: "info_card",
                         title: "Pendaftaran TOEFL / Test Baca Al-Quran",
-                        description: "Silahkan mendaftar untuk mengikuti tes TOEFL atau Test Baca Al-Quran.",
+                        description: "Silahkan mendaftar untuk mengikuti tes TOEFL atau Test Baca Al-Quran..",
                         modifier: SduiTheme.modifiers.infoCard,
                         action: {
                             type: "navigation_action",
