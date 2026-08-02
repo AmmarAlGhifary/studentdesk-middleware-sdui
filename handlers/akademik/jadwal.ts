@@ -49,12 +49,63 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                 type: "column",
                 children: [
                     {
-                        type: "empty_state_card",
-                        message: "Jadwal feature is under construction.",
-                        modifier: {
-                            width: { type: "fill" },
-                            padding: { vertical: 48, horizontal: 16 }
-                        }
+                        type: "tab_layout",
+                        tabs: [
+                            {
+                                title: "Jadwal Kuliah",
+                                children: scheduleCards.length > 0 ? scheduleCards : [
+                                    {
+                                        type: "empty_state_card",
+                                        message: "Tidak ada jadwal perkuliahan",
+                                        modifier: {
+                                            width: { type: "fill" },
+                                            margin: { horizontal: 16, vertical: 16 },
+                                            padding: { all: 16 },
+                                            corner_radius: SduiTheme.dimensions.cardRadius,
+                                            border_width: SduiTheme.dimensions.borderWidth,
+                                            border_color: SduiTheme.colors.cardBorder,
+                                            background_color: SduiTheme.colors.cardBackground
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                title: "Pengganti",
+                                children: replacementCards.length > 0 ? replacementCards : [
+                                    {
+                                        type: "empty_state_card",
+                                        message: "Tidak ada jadwal pengganti",
+                                        modifier: {
+                                            width: { type: "fill" },
+                                            margin: { horizontal: 16, vertical: 16 },
+                                            padding: { all: 16 },
+                                            corner_radius: SduiTheme.dimensions.cardRadius,
+                                            border_width: SduiTheme.dimensions.borderWidth,
+                                            border_color: SduiTheme.colors.cardBorder,
+                                            background_color: SduiTheme.colors.cardBackground
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                title: "Ujian",
+                                children: examCards.length > 0 ? examCards : [
+                                    {
+                                        type: "empty_state_card",
+                                        message: "Tidak ada jadwal ujian saat ini",
+                                        modifier: {
+                                            width: { type: "fill" },
+                                            margin: { horizontal: 16, vertical: 16 },
+                                            padding: { all: 16 },
+                                            corner_radius: SduiTheme.dimensions.cardRadius,
+                                            border_width: SduiTheme.dimensions.borderWidth,
+                                            border_color: SduiTheme.colors.cardBorder,
+                                            background_color: SduiTheme.colors.cardBackground
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
                     }
                 ]
             }
