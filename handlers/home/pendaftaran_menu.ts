@@ -19,6 +19,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             },
             body: {
                 type: "column",
+                modifier: {
+                    width: { type: "fill" }
+                },
                 children: [
                     {
                         type: "spacer",
@@ -39,7 +42,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                         },
                         modifier: SduiTheme.modifiers.infoCard
                     },
-                     {
+                    {
                         type: "spacer",
                         size: "large"
                     },
