@@ -128,7 +128,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                         modifier: SduiTheme.modifiers.infoCard,
                         action: {
                             type: "navigation_action",
-                            destination: "pendaftaran_tes"
+                            destination: "pendaftaran_menu"
                         }
                     },
                 ]

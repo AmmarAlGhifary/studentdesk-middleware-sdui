@@ -25,10 +25,6 @@
       "destination": "/api/home?screen=permintaan_surat"
     },
     {
-      "source": "/api/pendaftaran_tes",
-      "destination": "/api/home?screen=pendaftaran_tes"
-    },
-    {
       "source": "/api/jadwal",
       "destination": "/api/schedule?screen=jadwal"
     },

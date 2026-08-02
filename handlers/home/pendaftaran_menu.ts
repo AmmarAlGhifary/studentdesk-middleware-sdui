@@ -12,16 +12,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             type: "screen",
             screen_id: "pendaftaran_menu",
             app_bar: {
-                title: "Pendaftaran Tes",
+                title: "Pendaftaran Test",
                 show_profile_icon: false,
                 show_notification_icon: false,
                 show_logout_icon: false,
             },
             body: {
                 type: "column",
-                modifier: {
-                    width: { type: "fill" }
-                },
                 children: [
                     {
                         type: "spacer",
