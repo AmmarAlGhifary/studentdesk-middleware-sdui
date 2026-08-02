@@ -1,7 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import homeHandler from '../handlers/home/home';
 import permintaanSuratHandler from '../handlers/home/permintaan_surat';
-import pendaftaranTesHandler from '../handlers/home/pendaftaran_tes';
 import formSuratHandler from '../handlers/home/form_surat';
 import pengumumanHandler from '../handlers/home/pengumuman';
 import pengumumanDetailHandler from '../handlers/home/pengumuman_detail';
@@ -18,7 +17,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     switch(screen) {
         case 'home': return homeHandler(req, res);
         case 'permintaan_surat': return permintaanSuratHandler(req, res);
-        case 'pendaftaran_tes': return pendaftaranTesHandler(req, res);
         case 'form_surat': return formSuratHandler(req, res);
         case 'pengumuman': return pengumumanHandler(req, res);
         case 'pengumuman_detail': return pengumumanDetailHandler(req, res);
