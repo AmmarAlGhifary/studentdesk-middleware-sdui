@@ -60,7 +60,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                         tabs: [
                             {
                                 title: "Histori Skor",
-                                children: historyCards
+                                children: historyCards,
+                                modifier: { margin: { vertical: 10} }
                             },
                             {
                                 title: "Jadwal Tersedia",
@@ -73,7 +74,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                                             type: "navigation_action",
                                             destination: "form_uet?jadwal=11_juli_2026"
                                         },
-                                        modifier: SduiTheme.modifiers.infoCard
+                                        modifier: SduiTheme.modifiers.infoCard, margin: {
+                                            vertical: 10
+                                        }
                                     }
                                 ]
                             }
