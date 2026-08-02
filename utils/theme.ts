@@ -81,7 +81,7 @@ export const SduiTheme = {
         },
         scoreCard: {
             width: { type: "fill" },
-            margin: { horizontal: 16, vertical: 8 },
+            margin: { horizontal: 16, vertical: 16 },
             padding: { all: 16 },
             corner_radius: dimensions.cardRadius,
             border_width: dimensions.borderWidth,
