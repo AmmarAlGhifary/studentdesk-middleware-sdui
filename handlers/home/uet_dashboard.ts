@@ -33,7 +33,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             historyCards.push({
                 type: "empty_state_card",
                 message: "Belum ada histori UET.",
-                modifier: { width: { type: "fill" }, margin: { horizontal: 16, vertical: 8 }, padding: { all: 16 }, corner_radius: 12, border_width: 1, border_color: "#E0E0E0", background_color: "#F8F9FA" }
+                modifier: SduiTheme.modifiers.emptyStateCard
             });
         }
         
@@ -61,7 +61,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                             {
                                 title: "Histori Skor",
                                 children: historyCards,
-                                modifier: { margin: { vertical: 10} }
                             },
                             {
                                 title: "Jadwal Tersedia",
@@ -74,6 +73,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                                             type: "navigation_action",
                                             destination: "form_uet?jadwal=11_juli_2026"
                                         },
+                                        modifier: SduiTheme.modifiers.infoCard
                                     }
                                 ]
                             }
