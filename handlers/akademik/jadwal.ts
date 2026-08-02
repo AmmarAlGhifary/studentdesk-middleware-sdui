@@ -22,10 +22,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         const protocol = req.headers['x-forwarded-proto'] || (host.includes('localhost') || host.includes('10.0.2.2') ? 'http' : 'https');
         const baseUrl = `${protocol}://${host}`;
         
-        // const itemsJadwal = await fetchUaiApi('/jadwal/JadwalKuliah', context);
-        // const itemsNilai = await fetchUaiApi('/jadwal/JadwalUjian', context);
-        // const itemsPengganti = await fetchUaiApi('/jadwal/JadwalKuliahPengganti', context);
-
         const [itemsJadwal, itemsNilai, itemsPengganti] = await Promise.all([
             fetchUaiApi('/jadwal/JadwalKuliah', context),
             fetchUaiApi('/jadwal/JadwalUjian', context),
@@ -138,7 +134,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             time: time,
             room: room,
             lecturer: item.NamaDosen || "Dosen tidak tersedia",
-            modifier: SduiTheme.modifiers.scheduleCard
+            modifier: SduiTheme.modifiers.scheduleCard,
+            // TODO add action to detail after endpoint received
+            // action: {
+            //     type: "navigation_action",
+            //     destination: "jadwal_detail",
+            // }
         }
     }
 }
