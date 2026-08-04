@@ -17,6 +17,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     try {
         logger.info(`Fetching live academic data for NIM: ${context.nim}`);
         const items = await fetchUaiApi('/biodata/LihatBiodata', context);
+        const notifList = await fetchUaiApi('/notifikasi/getNotifikasiByNIM', context);
         const profile = items.length > 0 ? items[0] : null;
 
         const children: any[] = [];
@@ -76,7 +77,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             app_bar: {
                 title: "Profile",
                 show_profile_icon: false,
-                show_logout_icon: true 
+                show_logout_icon: true,
+                show_notification_icon: true,
+                notification_count: notifList ? notifList.length : 0,
             },
             body: {
                 type: "column",

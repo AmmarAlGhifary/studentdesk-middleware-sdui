@@ -18,6 +18,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                 show_profile_icon: false,
                 show_notification_icon: false,
                 show_logout_icon: false,
+                show_back_icon: true,
             },
             body: {
                 type: "form_container",

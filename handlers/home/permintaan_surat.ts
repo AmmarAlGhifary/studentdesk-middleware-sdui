@@ -17,11 +17,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     try {
         return res.status(200).json({
             type: "screen",
-            screen_id: "permintaan_surat",
+            screen_id: "perminaan_surat",
             app_bar: {
                 title: "Histori Permintaan Surat",
                 show_profile_icon: false,
-                show_logout_icon: false
+                show_logout_icon: false,
+                show_back_icon: true,
             },
             body: {
                 type: "column",

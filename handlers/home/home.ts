@@ -38,7 +38,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                 show_profile_icon: false,
                 show_notification_icon: true, 
                 notification_count: notifList ? notifList.length : 0,
-                show_logout_icon: true,
+                show_logout_icon: false,
             },
             body: {
                 type: "column",

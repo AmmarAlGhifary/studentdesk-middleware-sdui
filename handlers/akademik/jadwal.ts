@@ -22,10 +22,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         const protocol = req.headers['x-forwarded-proto'] || (host.includes('localhost') || host.includes('10.0.2.2') ? 'http' : 'https');
         const baseUrl = `${protocol}://${host}`;
         
-        const [itemsJadwal, itemsNilai, itemsPengganti] = await Promise.all([
+        const [itemsJadwal, itemsNilai, itemsPengganti, notifList] = await Promise.all([
             fetchUaiApi('/jadwal/JadwalKuliah', context),
             fetchUaiApi('/jadwal/JadwalUjian', context),
-            fetchUaiApi('/jadwal/JadwalKuliahPengganti', context)
+            fetchUaiApi('/jadwal/JadwalKuliahPengganti', context),
+            fetchUaiApi('/notifikasi/getNotifikasiByNIM', context)
         ]);
 
         const scheduleCards = itemsJadwal.length > 0 ? itemsJadwal.map(mapToScheduleCard) : [];
@@ -39,7 +40,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                 title: "Jadwal",
                 show_profile_icon: false,
                 show_notification_icon: true,
-                notification_count : 0
+                notification_count : notifList ? notifList.length : 0
             },
             body: {
                 type: "column",

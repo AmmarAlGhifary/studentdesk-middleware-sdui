@@ -16,6 +16,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     try {
         const items = await fetchUaiApi('/biodata/LihatBiodata', context);
+        const notifList = await fetchUaiApi('/notifikasi/getNotifikasiByNIM', context);
         const profile = items.length > 0 ? items[0] : null;
 
         const children: any[] = [];
@@ -48,6 +49,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                 }
             })
 
+            children.push({
+                type: "spacer",
+                size: "medium"
+            });
+
             children.push(createCard("NIM", profile.mhs_nim));
             children.push(createCard("Tempat, Tanggal Lahir", `${profile.mhs_tplhr || "-"}, ${profile.mhs_tglhr || "-"}`));
             children.push(createCard("Email", profile.mhs_email));
@@ -71,6 +77,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             screen_id: "detail_profile",
             app_bar: {
                 title: "Detail Profile",
+                show_back_icon: true,
+                show_notification_icon: true,
+                notification_count: notifList ? notifList.length : 0,
             },
             body: {
                 type: "column",
