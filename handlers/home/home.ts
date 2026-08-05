@@ -47,26 +47,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                      width: { "type": "fill" } 
                     },
                 children: [
-                       // Carousel Section
-                    {
-                        type: "spacer",
-                        size: "medium"
-                    },
-                    {
-                        type: "carousel",
-                        items: [
-                            { url: `${baseUrl}/images/bg-uai.jpg` },
-                            { url: `${baseUrl}/images/back-min.jpg` },
-                            { url: `${baseUrl}/images/hero-uai.jpg` },
-                            { url: `${baseUrl}/images/bg-uai-2.jpg` }
-                        ]
-                    },
-                    {
-                        type: "spacer",
-                        size: "medium"
-                    },
-
-                    // Jadwal Kuliah Section
+                     { type: "spacer", size: "medium" },
+                    
                     {
                         type: "section_header",
                         title: "Jadwal Kelas Hari Ini",
@@ -80,10 +62,18 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                         message: "Tidak ada jadwal kelas untuk hari ini.",
                         modifier: SduiTheme.modifiers.emptyStateCard,
                     }]),
+                    { type: "spacer", size: "medium" },
+
                     {
-                        type: "spacer",
-                        size: "medium"
+                        type: "carousel",
+                        items: [
+                            { url: `${baseUrl}/images/bg-uai.jpg` },
+                            { url: `${baseUrl}/images/back-min.jpg` },
+                            { url: `${baseUrl}/images/hero-uai.jpg` },
+                            { url: `${baseUrl}/images/bg-uai-2.jpg` }
+                        ]
                     },
+                    { type: "spacer", size: "medium" },
 
                      // Jadwal Pengganti Section
                     {
