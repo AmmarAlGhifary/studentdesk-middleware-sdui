@@ -71,11 +71,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                         title: "Tunggakan Pembayaran UKT",
                         description: "Mohon segera melunasi pembayaran UKT semester berjalan sebelum masa KRS berakhir untuk menghindari pemblokiran sistem akademik.",
                         modifier: {
-                            margin: { horizontal: 16, top: 16, bottom: 8 },
+                            margin: { horizontal: 26, top: 16, bottom: 8 },
                             background_color: "#930b20", 
                             corner_radius: 12,
-                            text_color: "#ffffff",
-                            text_size: 12
+                            text_color: "#ffffff"
                         },
                         action: {
                             type: "navigation_action",
