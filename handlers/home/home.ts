@@ -47,8 +47,26 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                      width: { "type": "fill" } 
                     },
                 children: [
-                    { type: "spacer", size: "medium" },
-                    
+                    // Carousel Section
+                    {
+                        type: "spacer",
+                        size: "medium"
+                    },
+                    {
+                        type: "carousel",
+                        items: [
+                            { url: `${baseUrl}/images/bg-uai.jpg` },
+                            { url: `${baseUrl}/images/back-min.jpg` },
+                            { url: `${baseUrl}/images/hero-uai.jpg` },
+                            { url: `${baseUrl}/images/bg-uai-2.jpg` }
+                        ]
+                    },
+                    {
+                        type: "spacer",
+                        size: "medium"
+                    },
+
+                    // Jadwal Kuliah Section
                     {
                         type: "section_header",
                         title: "Jadwal Kelas Hari Ini",
@@ -62,37 +80,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                         message: "Tidak ada jadwal kelas untuk hari ini.",
                         modifier: SduiTheme.modifiers.emptyStateCard,
                     }]),
-                    { type: "spacer", size: "medium" },
-
                     {
-                        type: "carousel",
-                        items: [
-                            { url: `${baseUrl}/images/bg-uai.jpg` },
-                            { url: `${baseUrl}/images/back-min.jpg` },
-                            { url: `${baseUrl}/images/hero-uai.jpg` },
-                            { url: `${baseUrl}/images/bg-uai-2.jpg` }
-                        ]
+                        type: "spacer",
+                        size: "medium"
                     },
-                    { type: "spacer", size: "medium" },
 
-                      {
-                        type: "warning_banner",
-                        title: "Tunggakan Pembayaran UKT",
-                        description: "Mohon segera melunasi pembayaran UKT semester berjalan sebelum masa KRS berakhir untuk menghindari pemblokiran sistem akademik.",
-                        modifier: {
-                            margin: { horizontal: 16, top: 16, bottom: 8 },
-                            padding: { all: 11 },
-                            background_color: "#930b20", 
-                            corner_radius: 12,
-                            text_color: "#ffffff"
-                        },
-                        action: {
-                            type: "navigation_action",
-                            destination: "keuangan" 
-                        }
-                    },
-                    
-                    { type: "spacer", size: "medium" },
                      // Jadwal Pengganti Section
                     {
                         type: "section_header",
@@ -115,19 +107,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                         title: "Layanan Akademik",
                         modifier: SduiTheme.modifiers.sectionHeader
                     },
-                  {
-                     type: "info_card",
+                    {
+                        type: "info_card",
                         title: "Permintaan Surat",
                         description: "Akses layanan permintaan surat akademik.",
-                        modifier: {
-                            width: { type: "fill" },
-                            margin: { horizontal: 16, vertical: 8 },
-                            padding: { all: 24 },   
-                            corner_radius: 16, 
-                            background_color: "#E3F2FD",   
-                            border_width: 2,
-                            border_color: "#1976D2"
-                        },
+                        modifier: SduiTheme.modifiers.infoCard,
                         action: {
                             type: "navigation_action",
                             destination: "permintaan_surat"
