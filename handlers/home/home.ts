@@ -74,7 +74,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                             margin: { horizontal: 16, top: 16, bottom: 8 },
                             background_color: "#930b20", 
                             corner_radius: 12,
-                            text_color: "#ffffff"
+                            text_color: "#ffffff",
+                            text_size: 12
                         },
                         action: {
                             type: "navigation_action",
