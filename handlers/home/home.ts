@@ -115,16 +115,26 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                         modifier: SduiTheme.modifiers.sectionHeader
                     },
                     // Permintaan Surat
-                    {
-                        type: "info_card",
+   {
+                     type: "info_card",
                         title: "Permintaan Surat",
                         description: "Akses layanan permintaan surat akademik.",
-                        modifier: SduiTheme.modifiers.infoCard,
+                        modifier: {
+                            width: { type: "fill" },
+                            margin: { horizontal: 16, vertical: 8 },
+                            padding: { all: 24 },   
+                            corner_radius: 16, 
+                            background_color: "#E3F2FD",   
+                            border_width: 2,
+                            text_color: "#FFFFFF",
+                            border_color: "#1976D2"
+                        },
                         action: {
                             type: "navigation_action",
                             destination: "permintaan_surat"
                         }
                     },
+
                     {
                         type: "spacer",
                         size: "large"
