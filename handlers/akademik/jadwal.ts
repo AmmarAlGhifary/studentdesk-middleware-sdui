@@ -50,8 +50,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                         tabs: [
                             {
                                 title: "Jadwal Kuliah",
-                                children: scheduleCards.length > 0 ? scheduleCards : [
-                                    {
+                                children: scheduleCards.length > 0 ? [{
+                                        type: "horizontal_list",
+                                        arrangement: "start",
+                                        modifier: {
+                                            padding: { horizontal: 16, top: 16 }
+                                        },
+                                        children: scheduleCards
+                                    }
+                                ] : [
+                                   {
                                         type: "empty_state_card",
                                         message: "Tidak ada jadwal perkuliahan",
                                         modifier: {

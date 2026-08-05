@@ -126,7 +126,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                             corner_radius: 16, 
                             background_color: "#E3F2FD",   
                             border_width: 2,
-                            text_color: "#FFFFFF",
+                            text_color: "#171010",
                             border_color: "#1976D2"
                         },
                         action: {
