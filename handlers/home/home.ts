@@ -140,14 +140,21 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                         size: "large"
                     },
                     // TOEFLSECTION
-                    {
+                 {
                         type: "info_card",
                         title: "Pendaftaran TOEFL / Test Baca Al-Quran",
-                        description: "Silahkan mendaftar untuk mengikuti tes TOEFL atau Test Baca Al-Quran..",
+                        description: "Silahkan mendaftar untuk mengikuti tes TOEFL atau Test Baca Al-Quran.",
                         modifier: SduiTheme.modifiers.infoCard,
                         action: {
-                            type: "navigation_action",
-                            destination: "pendaftaran_menu"
+                            type: "show_dialog_action",
+                            dialog: {
+                                title: "Informasi Pendaftaran",
+                                message: "Pendaftaran saat ini sedang ditutup dan akan dibuka kembali pada awal bulan depan. Harap cek secara berkala.",
+                                confirm_text: "Tutup",
+                                confirm_action: {
+                                    type: "navigate_back_action"
+                                }
+                            }
                         }
                     },
                 ]
