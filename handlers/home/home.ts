@@ -75,6 +75,20 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                     },
                     { type: "spacer", size: "medium" },
 
+                         {
+                        type: "warning_banner",
+                        title: "Tunggakan Pembayaran UKT",
+                        description: "Mohon segera melunasi pembayaran UKT semester berjalan sebelum masa KRS berakhir untuk menghindari pemblokiran sistem akademik.",
+                        modifier: {
+                            margin: { horizontal: 16, top: 16, bottom: 8 },
+                            background_color: "#FFEBEE", // Warna merah muda untuk warning
+                            corner_radius: 12
+                        },
+                        action: {
+                            type: "navigation_action",
+                            destination: "keuangan" // Saat diklik, arahkan ke halaman keuangan
+                        }
+                    },
                      // Jadwal Pengganti Section
                     {
                         type: "section_header",
