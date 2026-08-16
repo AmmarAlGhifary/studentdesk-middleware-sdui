@@ -65,6 +65,28 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                         type: "spacer",
                         size: "medium"
                     },
+                    // Warning Banner Section
+                    {
+                        type: "warning_banner",
+                        title: "Tunggakan Pembayaran UKT",
+                        description: "Mohon segera melunasi pembayaran UKT semester berjalan sebelum masa KRS berakhir untuk menghindari pemblokiran sistem akademik.",
+                        modifier: {
+                            margin: { horizontal: 16, top: 16, bottom: 8 },
+                            padding: { all: 11 },
+                            background_color: "#930b20", 
+                            corner_radius: 12,
+                            text_color: "#ffffff"
+                        },
+                        action: {
+                            type: "navigation_action",
+                            destination: "keuangan" 
+                        }
+                    },
+                    
+                    { 
+                        type: "spacer", 
+                        size: "medium" 
+                    },
 
                     // Jadwal Kuliah Section
                     {
@@ -107,11 +129,20 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                         title: "Layanan Akademik",
                         modifier: SduiTheme.modifiers.sectionHeader
                     },
-                    {
-                        type: "info_card",
+                       {
+                     type: "info_card",
                         title: "Permintaan Surat",
                         description: "Akses layanan permintaan surat akademik.",
-                        modifier: SduiTheme.modifiers.infoCard,
+                        modifier: {
+                            width: { type: "fill" },
+                            margin: { horizontal: 16, vertical: 8 },
+                            padding: { all: 24 },   
+                            corner_radius: 16, 
+                            background_color: "#E3F2FD",   
+                            border_width: 2,
+                            text_color: "#FFFFFF",
+                            border_color: "#1976D2"
+                        },
                         action: {
                             type: "navigation_action",
                             destination: "permintaan_surat"
