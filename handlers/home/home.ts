@@ -133,16 +133,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                      type: "info_card",
                         title: "Permintaan Surat",
                         description: "Akses layanan permintaan surat akademik.",
-                        modifier: {
-                            width: { type: "fill" },
-                            margin: { horizontal: 16, vertical: 8 },
-                            padding: { all: 24 },   
-                            corner_radius: 16, 
-                            background_color: "#E3F2FD",   
-                            border_width: 2,
-                            text_color: "#120909",
-                            border_color: "#1976D2"
-                        },
+                        modifier: SduiTheme.modifiers.infoCard,
                         action: {
                             type: "navigation_action",
                             destination: "permintaan_surat"
